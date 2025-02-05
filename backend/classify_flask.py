@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
 import random
+from flask_cors import CORS  # Import CORS module
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -15,12 +17,12 @@ def upload():
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
 
-    # You can process the file here, but for now, we simulate the prediction
+    # Simulate the prediction
     prediction = random.choice(["Happy", "Tired"])
 
     # Return the prediction as a JSON response
     return jsonify({"prediction": prediction})
 
-
 if __name__ == '__main__':
     app.run(port=5000)
+
